@@ -77,16 +77,40 @@ def getWeather(lat, lon):
         dom = minidom.parseString(data)
         items = dom.getElementsByTagName("data")
         for item in items:
-            hour = item.getElementsByTagName("hour")[0]
-            day = item.getElementsByTagName("day")[0]
-            wfKor = item.getElementsByTagName("wfKor")[0]
-            temp = item.getElementsByTagName("temp")[0]
+            hour = item.getElementsByTagName("hour")[0]   # 시간 3시간 단위
+            day = item.getElementsByTagName("day")[0]     # 번째날
+            temp = item.getElementsByTagName("temp")[0]   # 온도
+            tmx = item.getElementsByTagName("tmx")[0]     # 최저온도
+            tmn = item.getElementsByTagName("tmn")[0]     # 최고온도
+            sky = item.getElementsByTagName("sky")[0]     # 하늘상태코드
+            pty = item.getElementsByTagName("pty")[0]     # 강수상태코드
+            wfKor = item.getElementsByTagName("wfKor")[0] # 날씨
+            wfEn = item.getElementsByTagName("wfEn")[0]   # 날씨영어
+            pop = item.getElementsByTagName("pop")[0]     # 강수확률%
+            r12 = item.getElementsByTagName("r12")[0]     # 12시간예상강수량
+            s12 = item.getElementsByTagName("s12")[0]     # 12시간예상적설량
+            ws = item.getElementsByTagName("ws")[0]       # 풍속 m/s
+            wd = item.getElementsByTagName("wd")[0]       # 풍향코드
+            wdKor = item.getElementsByTagName("wdKor")[0] # 풍향
+            wdEn = item.getElementsByTagName("wdEn")[0] # 풍향영어
+            reh = item.getElementsByTagName("reh")[0]     # 습도%
             wdata.append([ hour.firstChild.data.strip(), \
                 day.firstChild.data.strip(), \
-                wfKor.firstChild.data.strip(), \
                 temp.firstChild.data.strip(), \
+                tmx.firstChild.data.strip(), \
                 tmn.firstChild.data.strip(), \
-                tmx.firstChild.data.strip() ])
+                sky.firstChild.data.strip(), \
+                pty.firstChild.data.strip(), \
+                wfKor.firstChild.data.strip(), \
+                wfEn.firstChild.data.strip(), \
+                pop.firstChild.data.strip(), \
+                r12.firstChild.data.strip(), \
+                s12.firstChild.data.strip(), \
+                ws.firstChild.data.strip(), \
+                wd.firstChild.data.strip(), \
+                wdKor.firstChild.data.strip(), \
+                wdEn.firstChild.data.strip(), \
+                reh.firstChild.data.strip() ])
     except urllib2.HTTPError, e:
         print "HTTP error: %d" % e.code
     except urllib2.URLError, e:
@@ -152,7 +176,7 @@ if __name__ == '__main__':
     data = getWeather(lat, lon)
     print data
     #for d in data:
-        #print d[0], d[1], d[2], d[3]
+        #print d[0], d[1], d[2], d[3], d[4], d[7]
         #print getWeatherCode(d[2])
     data = getMidTermWeather(code)
     print data
