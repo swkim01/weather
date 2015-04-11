@@ -80,8 +80,8 @@ def getWeather(lat, lon):
             hour = item.getElementsByTagName("hour")[0]   # 시간 3시간 단위
             day = item.getElementsByTagName("day")[0]     # 번째날
             temp = item.getElementsByTagName("temp")[0]   # 온도
-            tmx = item.getElementsByTagName("tmx")[0]     # 최저온도
-            tmn = item.getElementsByTagName("tmn")[0]     # 최고온도
+            tmx = item.getElementsByTagName("tmx")[0]     # 최고온도
+            tmn = item.getElementsByTagName("tmn")[0]     # 최저온도
             sky = item.getElementsByTagName("sky")[0]     # 하늘상태코드
             pty = item.getElementsByTagName("pty")[0]     # 강수상태코드
             wfKor = item.getElementsByTagName("wfKor")[0] # 날씨
@@ -92,7 +92,7 @@ def getWeather(lat, lon):
             ws = item.getElementsByTagName("ws")[0]       # 풍속 m/s
             wd = item.getElementsByTagName("wd")[0]       # 풍향코드
             wdKor = item.getElementsByTagName("wdKor")[0] # 풍향
-            wdEn = item.getElementsByTagName("wdEn")[0] # 풍향영어
+            wdEn = item.getElementsByTagName("wdEn")[0]   # 풍향영어
             reh = item.getElementsByTagName("reh")[0]     # 습도%
             wdata.append([ hour.firstChild.data.strip(), \
                 day.firstChild.data.strip(), \
