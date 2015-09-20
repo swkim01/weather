@@ -177,6 +177,6 @@ if __name__ == '__main__':
     print data
     #for d in data:
         #print d[0], d[1], d[2], d[3], d[4], d[7]
-        #print getWeatherCode(d[2])
+        #print getWeatherCode(d[7])
     data = getMidTermWeather(code)
     print data
