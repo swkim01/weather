@@ -2,8 +2,10 @@
 import math
 try:
     from urllib.request import urlopen #python 3
+    from urllib.error import HTTPError, URLError
 except ImportError:
     from urllib2 import urlopen #python 2
+    from urllib2 import HTTPError, URLError
 from xml.dom import minidom
 
 RE = 6371.00877 # 지구 반경(km)
@@ -112,9 +114,9 @@ def getWeather(lat, lon):
                 wdEn.firstChild.data.strip(), \
                 reh.firstChild.data.strip() ])
     except urllib2.HTTPError, e:
-        print "HTTP error: %d" % e.code
+        print("HTTP error: %d" % e.code)
     except urllib2.URLError, e:
-        print "Network error: %s" % e.reason.args[1]
+        print("Network error: %s" % e.reason.args[1])
 
     return wdata
 
@@ -162,10 +164,10 @@ def getMidTermWeather(code):
                     tmx.firstChild.data.strip() ])
             wdata.append([province.firstChild.data.strip(), \
                           city.firstChild.data.strip(), newdata])
-    except urllib2.HTTPError, e:
-        print "HTTP error: %d" % e.code
-    except urllib2.URLError, e:
-        print "Network error: %s" % e.reason.args[1]
+    except HTTPError as e:
+        print("HTTP error: %d" % e.code)
+    except URLError as e:
+        print("Network error: %s" % e.reason.args[1])
 
     return wdata
 
@@ -174,9 +176,9 @@ if __name__ == '__main__':
     lon = <longitude>
     code = <location>
     data = getWeather(lat, lon)
-    print data
-    #for d in data:
-        #print d[0], d[1], d[2], d[3], d[4], d[7]
-        #print getWeatherCode(d[7])
-    data = getMidTermWeather(code)
-    print data
+    print(data)
+    for d in data:
+        print(d[0], d[1], d[2], d[3], d[4], d[7])
+        #print(getWeatherCode(d[7]))
+    #data = getMidTermWeather(code)
+    #print(data)
